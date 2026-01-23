@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -18,43 +17,45 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// ၁။ MongoDB ချိတ်ဆက်ခြင်း (Password ကို letmein2026 ဟု ပြင်ထားပေးသည်)
+// MongoDB Connection
 const dbURI = 'mongodb+srv://chitpaing:letmein2026@cluster0neteng.kznts1e.mongodb.net/NetEngDB?retryWrites=true&w=majority';
 mongoose.connect(dbURI).then(() => console.log("✅ DB Connected")).catch(err => console.log("❌ DB Error:", err));
 
-// User Model
 const User = mongoose.model('User', new mongoose.Schema({
     username: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true }
 }));
 
-// ၂။ Email Transport (Pass ကို စာကြောင်းတစ်ကြောင်းတည်းဖြစ်အောင် ပြင်ထားသည်)
+// Email Transport Setup
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'chit.paingdway@gmail.com',
-        pass: 'dxquonzemqueddsz' // Space များဖယ်ထုတ်ထားသည်၊ ဤစာကြောင်းသည် တစ်ကြောင်းတည်းရှိရမည်
+        pass: 'dxquonzemqueddsz' 
     }
 });
 
 let otpStore = {};
 
-// --- ROUTES ---
-
 app.post('/send-otp', async (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    otpStore[req.body.email] = otp;
+    const email = req.body.email;
+    otpStore[email] = otp;
+    
+    console.log(`Attempting to send OTP to: ${email}`);
+
     try {
         await transporter.sendMail({
             from: '"NetEng Academy" <chit.paingdway@gmail.com>',
-            to: req.body.email,
-            subject: "Verification Code for NetEng Academy",
+            to: email,
+            subject: "Verification Code",
             text: `Your verification code is: ${otp}`
         });
+        console.log("✅ Email sent successfully");
         res.sendStatus(200);
     } catch (e) { 
-        console.log("Email Error:", e);
+        console.error("❌ Email Error:", e.message);
         res.status(500).send(e.message); 
     }
 });
@@ -89,8 +90,4 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/logout', (req, res) => {
-    req.session.destroy(() => res.redirect('/login.html'));
-});
-
-app.listen(PORT, () => console.log(`🚀 Server is running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on ${PORT}`));
