@@ -1,12 +1,13 @@
 // သင်ခန်းစာ အချက်အလက်များ
 const courses = [
     { id: "ospf", name: "OSPF Basics to Advanced", fileName: "ospf_course.pdf" },
-    { id: "bgp", name: "BGP Routing Expert", fileName: "bgp_expert.pdf" },
+    { id: "bgp", name: "CCIE BGP", fileName: "CCIE_BGP.pdf" },
     { id: "mpls", name: "MPLS Concepts", fileName: "mpls_v1.pdf" },
-    { id: "sdwan", name: "SD-WAN Architecture", fileName: "sdwan_intro.pdf" },
+    { id: "sdwan", name: "SD-WAN Architecture", fileName: "SDWAN_Architectire.pdf" },
     { id: "ccnp Switch", name: "CCNP Switching", fileName: "ccnp_switch.pdf" },
     { id: "ccna datacenter", name: "CCNA Datacenter", fileName: "ccna_datacenter.pdf" },
     { id: "cisco aci", name: "Cisco ACI", fileName: "cisco_aci.pdf" },
+    { id: "Python Networking", name: "Cisco ACI", fileName: "Python_network_programming.pdf" },
 
 ];
 
