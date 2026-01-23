@@ -33,8 +33,9 @@ const User = mongoose.model('User', new mongoose.Schema({
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'သင့်အီးမေးလ်@gmail.com',
-        pass: 'သင့်ရဲ့_16_digit_app_password'
+        user: 'chit.paingdway@gmail.com',
+        pass: 'dxqu onze mque ddsz
+'
     }
 });
 
@@ -47,7 +48,7 @@ app.post('/send-otp', async (req, res) => {
     otpStore[req.body.email] = otp;
     try {
         await transporter.sendMail({
-            from: '"NetEng Academy" <သင့်အီးမေးလ်@gmail.com>',
+            from: '"NetEng Academy" <chit.paingdway@gmail.com>',
             to: req.body.email,
             subject: "Verification Code",
             text: `Your verification code is: ${otp}`
