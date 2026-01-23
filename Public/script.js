@@ -8,7 +8,7 @@ const courses = [
     { id: "ccna datacenter", name: "CCNA Datacenter", fileName: "ccna_datacenter.pdf" },
     { id: "cisco aci", name: "Cisco ACI", fileName: "cisco_aci.pdf" },
     { id: "Python Networking", name: "Python Networking", fileName: "Python_network_programming.pdf" },
-    { id: "CCIE Routing & Switching", name: "CCIE R&S Third Edition", fileName: "CCIE_R&S.pdf" },
+    { id: "CCIE R&S Third Edition", name: "CCIE R&S Third Edition", fileName: "CCIE_R&S.pdf" },
     { id: "CCIE Multicast", name: "CCIE Multicast", fileName: "CCIE_Multicast.pdf" },
     { id: "CCIE Ipsec", name: "CCIE Ipsec", fileName: "CCIE_Ipsec.pdf" },
 
