@@ -22,13 +22,12 @@
         input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
         .otp-box { display: flex; gap: 5px; margin-top: 5px; }
         .otp-box input { flex: 2; }
-        .otp-box button { flex: 1; font-size: 0.75rem; background: var(--cisco-blue); margin-top: 0; }
         button {
             width: 100%; padding: 12px; background: var(--dark-navy); color: white;
             border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px;
         }
-        button:hover { background: var(--cisco-blue); }
-        .footer-text { margin-top: 15px; font-size: 0.85rem; }
+        .otp-btn { background: var(--cisco-blue); margin-top: 0; flex: 1; font-size: 0.75rem; }
+        button:hover { opacity: 0.9; }
     </style>
 </head>
 <body>
@@ -40,7 +39,7 @@
                 <label>Email Address</label>
                 <div class="otp-box">
                     <input type="email" name="email" id="email" placeholder="Email" required>
-                    <button type="button" onclick="sendOTP()">GET CODE</button>
+                    <button type="button" class="otp-btn" onclick="sendOTP()">GET CODE</button>
                 </div>
             </div>
             <div class="input-group">
@@ -57,20 +56,30 @@
             </div>
             <button type="submit">CREATE ACCOUNT</button>
         </form>
-        <div class="footer-text">Already have an account? <a href="/login.html">Login</a></div>
+        <div style="margin-top:15px; font-size:0.85rem;">Already have an account? <a href="/login.html">Login</a></div>
     </div>
 
     <script>
         async function sendOTP() {
             const email = document.getElementById('email').value;
             if(!email) return alert("Email အရင်ရိုက်ပါ");
-            const res = await fetch('/send-otp', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ email })
-            });
-            if(res.ok) alert("Verification code ပို့လိုက်ပါပြီ။");
-            else alert("Error: Email မပို့နိုင်ပါ။");
+
+            try {
+                const res = await fetch('/send-otp', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ email })
+                });
+                
+                if(res.ok) {
+                    alert("Verification code ပို့လိုက်ပါပြီ။ (Spam folder ကိုပါ စစ်ပေးပါ)");
+                } else {
+                    const err = await res.text();
+                    alert("Error: " + err);
+                }
+            } catch (e) {
+                alert("Server Error! Check your connection.");
+            }
         }
     </script>
 </body>
