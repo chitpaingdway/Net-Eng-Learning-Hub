@@ -7,7 +7,7 @@ const courses = [
     { id: "ccnp Switch", name: "CCNP Switching", fileName: "ccnp_switch.pdf" },
     { id: "ccna datacenter", name: "CCNA Datacenter", fileName: "ccna_datacenter.pdf" },
     { id: "cisco aci", name: "Cisco ACI", fileName: "cisco_aci.pdf" },
-    { id: "Python Networking", name: "Cisco ACI", fileName: "Python_network_programming.pdf" },
+    { id: "Python Networking", name: "Python Networking", fileName: "Python_network_programming.pdf" },
 
 ];
 
