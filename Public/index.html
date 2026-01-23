@@ -20,74 +20,86 @@
             </div>
             <a href="/logout" class="exit-btn">Exit Academy</a>
         </header>
-            <div class="instructor-header">
-                <img src="instructor.jpg" class="profile-img" alt="CCIE Instructor">
-                <div class="instructor-meta">
+
+        <div class="instructor-header">
+            <img src="static/instructor.jpg" class="profile-img" alt="CCIE Instructor">
+            <div class="instructor-meta">
                 <h2>Our Lead Instructor</h2>
-                <span>CCIE #68826 (Enterprise Infrastructure)</span>
+                <span class="ccie-text">CCIE #68826 (Enterprise Infrastructure)</span>
             </div>
         </div>
 
-       <div class="course-grid">
+        <div class="course-grid">
             <div class="card" onclick="openPDF('/uploads/ospf_course.pdf', 'OSPF Basics to Advanced')">
                 <div class="icon">📘</div>
                 <h3>OSPF Basics</h3>
                 <p>Standard Module</p>
             </div>
+
             <div class="card" onclick="openPDF('/uploads/CCIE_BGP.pdf', 'CCIE BGP')">
                 <div class="icon">🌐</div>
                 <h3>CCIE BGP</h3>
                 <p>Advanced Routing</p>
             </div>
+
             <div class="card" onclick="openPDF('/uploads/mpls_v1.pdf', 'MPLS Concepts')">
                 <div class="icon">🔗</div>
                 <h3>MPLS Concepts</h3>
                 <p>Service Provider</p>
             </div>
+
             <div class="card" onclick="openPDF('/uploads/SDWAN_Architectire.pdf', 'SD-WAN Architecture')">
                 <div class="icon">☁️</div>
                 <h3>SD-WAN</h3>
                 <p>Architecture</p>
             </div>
-	    <div class="card" onclick="openPDF('/uploads/SDWAN_Learning.pdf', 'SD-WAN Learning)”>
+
+            <div class="card" onclick="openPDF('/uploads/SDWAN_Learning.pdf', 'SD-WAN Learning')">
                 <div class="icon">☁️</div>
                 <h3>SD-WAN</h3>
                 <p>Learning SDWAN</p>
             </div>
+
             <div class="card" onclick="openPDF('/uploads/CCIE_R&S.pdf', 'CCIE R&S Third Edition')">
                 <div class="icon">📚</div>
                 <h3>CCIE R&S Third Edition</h3>
                 <p>Cisco CCIE R&S</p>
             </div>
+
             <div class="card" onclick="openPDF('/uploads/CCIE_Multicast.pdf', 'CCIE Multicast')">
                 <div class="icon">🏷️</div>
                 <h3>CCIE Multicast</h3>
                 <p>Cisco Multicast</p>
             </div>
+
             <div class="card" onclick="openPDF('/uploads/CCIE_Ipsec.pdf', 'CCIE Ipsec')">
                 <div class="icon">🔐</div>
                 <h3>CCIE Ipsec</h3>
                 <p>Cisco IPSEC</p>
             </div>
+
             <div class="card" onclick="openPDF('/uploads/ccnp_switch.pdf', 'CCNP Switching')">
                 <div class="icon">📗</div>
                 <h3>CCNP Switch</h3>
                 <p>L2 Enterprise</p>
             </div>
- 	    <div class="card" onclick="openPDF('/uploads/CCNP_Route.pdf', 'CCNP Route’)”>
-                <div class="icon"> 📕 </div>
+
+            <div class="card" onclick="openPDF('/uploads/CCNP_Route.pdf', 'CCNP Route')">
+                <div class="icon">📕</div>
                 <h3>CCNP Route</h3>
                 <p>L3 Routing</p>
             </div>
+
             <div class="card" onclick="openPDF('/uploads/ccna_datacenter.pdf', 'CCNA Datacenter')">
                 <div class="icon">🏢</div>
                 <h3>CCNA DC</h3>
                 <p>Cloud & Data Center</p>
             </div>
-	    <div class="card" onclick="openPDF('/uploads/CCNA’.pdf, 'CCNA Routing&Switching)”>
+
+            <div class="card" onclick="openPDF('/uploads/CCNA.pdf', 'CCNA Routing & Switching')">
                 <div class="icon">📔</div>
                 <h3>CCNA</h3>
-                <p>Routing&Swithcing</p>
+                <p>Routing & Switching</p>
             </div>
 
             <div class="card" onclick="openPDF('/uploads/cisco_aci.pdf', 'Cisco ACI')">
@@ -95,11 +107,13 @@
                 <h3>Cisco ACI</h3>
                 <p>SDN Fabric</p>
             </div>
-	    <div class="card" onclick="openPDF('/uploads/Network_Automation.pdf', 'Network Automation')">
+
+            <div class="card" onclick="openPDF('/uploads/Network_Automation.pdf', 'Network Automation')">
                 <div class="icon">🪄</div>
-                <h3>Network_Automation Cookbook</h3>
-                <p>Automation</p>
+                <h3>Network Automation</h3>
+                <p>Automation Cookbook</p>
             </div>
+
             <div class="card" onclick="openPDF('/uploads/Python_network_programming.pdf', 'Python Networking')">
                 <div class="icon">🐍</div>
                 <h3>Automation</h3>
@@ -107,7 +121,6 @@
             </div>
         </div>
     </div>
-
 
     <div id="pdfModal" class="modal">
         <div class="modal-content">
@@ -142,14 +155,13 @@
             const frame = document.getElementById("pdf-frame");
             if (frame.requestFullscreen) {
                 frame.requestFullscreen();
-            } else if (frame.webkitRequestFullscreen) { /* Safari */
+            } else if (frame.webkitRequestFullscreen) {
                 frame.webkitRequestFullscreen();
-            } else if (frame.msRequestFullscreen) { /* IE11 */
+            } else if (frame.msRequestFullscreen) {
                 frame.msRequestFullscreen();
             }
         }
 
-        // Close modal if user clicks outside of the content
         window.onclick = function(event) {
             const modal = document.getElementById('pdfModal');
             if (event.target == modal) {
