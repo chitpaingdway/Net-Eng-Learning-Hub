@@ -55,6 +55,8 @@ app.get('/login.html', (req, res) => {
     });
 });
 
+// PDF ဖိုင်များရှိသော uploads folder ကို လူတိုင်းကြည့်ရှုနိုင်အောင် လမ်းကြောင်းဖွင့်ပေးခြင်း
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.get('/', checkAuth, (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'index.html'), err => {
         if (err) res.sendFile(path.join(__dirname, 'public', 'index.html'));
