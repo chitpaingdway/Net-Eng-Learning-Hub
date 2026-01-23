@@ -3,54 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Net-Eng Cisco Learning Course</title>
+    <title>Net-Eng Cisco Academy</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <a href="/logout" title="Click to Logout" style="text-decoration: none;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" 
-                     class="brand-logo">
-                <div class="course-name">Net-Eng Cisco Learning Course</div>
-                <div class="instructor-title">CCIE#68826</div>
-                <div class="logout-tag">Exit Academy</div>
-            </a>
-        </div>
-        
-        <ul class="nav-tabs" id="tab-list">
-            </ul>
-    </div>
-
-    <div class="main-panel">
+    <div class="glass-container">
         <header>
-            <div class="header-info">
-                <h2 id="current-title">Welcome to the Academy</h2>
-                <span id="lang-status">Ready for Learning</span>
+            <div class="brand">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" class="logo">
+                <div class="brand-text">
+                    <h1>Net-Eng Academy</h1>
+                    <span>CCIE#68826</span>
+                </div>
             </div>
-            <div class="header-actions">
-                <div class="user-status">Online</div>
-            </div>
+            <a href="/logout" class="exit-btn">Exit Hub</a>
         </header>
-        
-        <div class="content-area">
-            <div class="viewer-wrapper">
-                <iframe id="pdf-viewer" src="" frameborder="0" allow="autoplay"></iframe>
+
+        <div class="course-grid">
+            <div class="card" onclick="openPDF('/uploads/ospf_course.pdf', 'OSPF Module')">
+                <div class="icon">📘</div>
+                <h3>OSPF Routing</h3>
+                <p>Standard Module</p>
             </div>
-            
-            <div class="control-bar">
-                <div class="file-info">
-                    <span id="file-name">Please select a module to begin</span>
-                </div>
-                <div class="actions">
-                    <a href="#" id="download-link" class="btn-download" download>📥 Download Module</a>
-                </div>
+            <div class="card" onclick="openPDF('/uploads/ccie_bgp.pdf', 'BGP Module')">
+                <div class="icon">🌐</div>
+                <h3>BGP Advanced</h3>
+                <p>CCIE Level</p>
+            </div>
+            <div class="card" onclick="openPDF('/uploads/cisco_aci.pdf', 'ACI Module')">
+                <div class="icon">☁️</div>
+                <h3>Cisco ACI</h3>
+                <p>SDN Fabric</p>
+            </div>
+            <div class="card" onclick="openPDF('/uploads/python_automation.pdf', 'Python Module')">
+                <div class="icon">🐍</div>
+                <h3>Automation</h3>
+                <p>Python NetDev</p>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="pdf-title">Course Material</span>
+                <div class="modal-btns">
+                    <button class="full-btn" onclick="goFull()">Full View</button>
+                    <a id="dl-link" href="#" class="dl-btn" download>Download</a>
+                    <span class="close" onclick="closePDF()">&times;</span>
+                </div>
+            </div>
+            <iframe id="pdf-frame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        function openPDF(path, title) {
+            document.getElementById('pdf-frame').src = path;
+            document.getElementById('dl-link').href = path;
+            document.getElementById('pdf-title').innerText = title;
+            document.getElementById('pdfModal').style.display = "block";
+        }
+        function closePDF() {
+            document.getElementById('pdfModal').style.display = "none";
+            document.getElementById('pdf-frame').src = "";
+        }
+        function goFull() {
+            let f = document.getElementById("pdf-frame");
+            if (f.requestFullscreen) f.requestFullscreen();
+            else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen();
+        }
+    </script>
 </body>
 </html>
