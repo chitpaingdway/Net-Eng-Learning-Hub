@@ -9,100 +9,61 @@
 </head>
 <body>
 
-    <div class="glass-container">
-        <header>
-            <div class="brand">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" class="logo">
-                <div class="brand-text">
-                    <h1>Net-Eng Academy</h1>
-                    <span>CCIE#68826</span>
-                </div>
-            </div>
-            <a href="/logout" class="exit-btn">Exit Academy</a>
-        </header>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Cisco_logo_blue_2016.svg/1200px-Cisco_logo_blue_2016.svg.png" class="brand-logo">
+            <div class="course-name">Net-Eng Academy</div>
+            <div class="instructor-title">CCIE#68826</div>
+        </div>
+        
+        <ul class="nav-tabs">
+            <li onclick="loadPDF('/uploads/ospf_course.pdf', 'OSPF Basics to Advanced')">OSPF Basics</li>
+            <li onclick="loadPDF('/uploads/CCIE_BGP.pdf', 'CCIE BGP')">CCIE BGP</li>
+            <li onclick="loadPDF('/uploads/mpls_v1.pdf', 'MPLS Concepts')">MPLS Concepts</li>
+            <li onclick="loadPDF('/uploads/SDWAN_Architectire.pdf', 'SD-WAN Architecture')">SD-WAN Architecture</li>
+            <li onclick="loadPDF('/uploads/ccnp_switch.pdf', 'CCNP Switching')">CCNP Switching</li>
+            <li onclick="loadPDF('/uploads/ccna_datacenter.pdf', 'CCNA Datacenter')">CCNA Datacenter</li>
+            <li onclick="loadPDF('/uploads/cisco_aci.pdf', 'Cisco ACI')">Cisco ACI</li>
+            <li onclick="loadPDF('/uploads/Python_network_programming.pdf', 'Python Networking')">Python Networking</li>
+        </ul>
 
-       <div class="course-grid">
-            <div class="card" onclick="openPDF('/uploads/ospf_course.pdf', 'OSPF Basics to Advanced')">
-                <div class="icon">📘</div>
-                <h3>OSPF Basics</h3>
-                <p>Standard Module</p>
-            </div>
-            <div class="card" onclick="openPDF('/uploads/CCIE_BGP.pdf', 'CCIE BGP')">
-                <div class="icon">🌐</div>
-                <h3>CCIE BGP</h3>
-                <p>Advanced Routing</p>
-            </div>
-            <div class="card" onclick="openPDF('/uploads/mpls_v1.pdf', 'MPLS Concepts')">
-                <div class="icon">🔗</div>
-                <h3>MPLS Concepts</h3>
-                <p>Service Provider</p>
-            </div>
-            <div class="card" onclick="openPDF('/uploads/SDWAN_Architectire.pdf', 'SD-WAN Architecture')">
-                <div class="icon">📶</div>
-                <h3>SD-WAN</h3>
-                <p>Architecture</p>
-            </div>
-            <div class="card" onclick="openPDF('/uploads/ccnp_switch.pdf', 'CCNP Switching')">
-                <div class="icon">⚡</div>
-                <h3>CCNP Switch</h3>
-                <p>L2 Enterprise</p>
-            </div>
-            <div class="card" onclick="openPDF('/uploads/ccna_datacenter.pdf', 'CCNA Datacenter')">
-                <div class="icon">🏢</div>
-                <h3>CCNA DC</h3>
-                <p>Cloud & Data Center</p>
-            </div>
-            <div class="card" onclick="openPDF('/uploads/cisco_aci.pdf', 'Cisco ACI')">
-                <div class="icon">☁️</div>
-                <h3>Cisco ACI</h3>
-                <p>SDN Fabric</p>
-            </div>
-            <div class="card" onclick="openPDF('/uploads/Python_network_programming.pdf', 'Python Networking')">
-                <div class="icon">🐍</div>
-                <h3>Automation</h3>
-                <p>Python Net-Dev</p>
-            </div>
+        <div class="sidebar-footer">
+            <a href="/logout" class="exit-link">Exit Academy</a>
         </div>
     </div>
 
-    <div id="pdfModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span id="pdf-title">Material Viewer</span>
-                <div class="modal-btns">
-                    <button class="full-btn" onclick="goFull()">Full View</button>
-                    <a id="dl-link" href="#" class="dl-btn" download>Download</a>
-                    <span class="close" onclick="closePDF()">&times;</span>
-                </div>
+    <div class="main-panel">
+        <header>
+            <div class="header-info">
+                <h2 id="current-title">Select a Module</h2>
+                <span id="status">Ready for Learning</span>
             </div>
-            <iframe id="pdf-frame" src=""></iframe>
+            <div class="header-actions">
+                <a id="download-btn" href="#" class="btn-download" download>Download Module</a>
+            </div>
+        </header>
+        
+        <div class="content-area">
+            <div class="viewer-wrapper">
+                <iframe id="pdf-viewer" src=""></iframe>
+            </div>
         </div>
     </div>
 
     <script>
-        function openPDF(path, title) {
-            const modal = document.getElementById('pdfModal');
-            const frame = document.getElementById('pdf-frame');
-            document.getElementById('pdf-title').innerText = title;
-            document.getElementById('dl-link').href = path;
-            frame.src = path;
-            modal.style.display = "block";
-        }
-
-        function closePDF() {
-            document.getElementById('pdfModal').style.display = "none";
-            document.getElementById('pdf-frame').src = "";
-        }
-
-        function goFull() {
-            const frame = document.getElementById("pdf-frame");
-            if (frame.requestFullscreen) frame.requestFullscreen();
-            else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('pdfModal');
-            if (event.target == modal) closePDF();
+        function loadPDF(path, title) {
+            // Update the iframe source
+            document.getElementById('pdf-viewer').src = path;
+            // Update the download link
+            document.getElementById('download-btn').href = path;
+            // Update text headers
+            document.getElementById('current-title').innerText = title;
+            document.getElementById('status').innerText = "Viewing Now";
+            
+            // Handle active tab styling
+            const tabs = document.querySelectorAll('.nav-tabs li');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.currentTarget.classList.add('active');
         }
     </script>
 </body>
