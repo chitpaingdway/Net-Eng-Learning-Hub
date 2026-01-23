@@ -19,7 +19,7 @@ app.use(session({
 }));
 
 // ၁။ MongoDB ချိတ်ဆက်ခြင်း (Replace with your link)
-const dbURI = 'mongodb+srv://chitpaing:P@ssw0rd@cluster0neteng.kznts1e.mongodb.net/NetEngDB?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://chitpaing:letmein2026@cluster0neteng.kznts1e.mongodb.net/NetEngDB?retryWrites=true&w=majority';
 mongoose.connect(dbURI).then(() => console.log("✅ DB Connected")).catch(err => console.log(err));
 
 // User Model
