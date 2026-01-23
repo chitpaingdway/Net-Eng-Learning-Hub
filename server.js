@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+// Render အတွက် PORT ကို အရှင်ထားပေးရပါမယ် (PORT 3000 သက်သက်ဆိုရင် အလုပ်မလုပ်ပါ)
+const PORT = process.env.PORT || 3000; 
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,10 +16,8 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// အစမ်းသုံးရန် User ဒေတာ (တကယ်တမ်းမှာ Database နဲ့ ချိတ်ရမှာပါ)
 const users = []; 
 
-// Login စစ်ဆေးသော Middleware
 function checkAuth(req, res, next) {
     if (req.session.user) next();
     else res.redirect('/login.html');
@@ -41,23 +40,20 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// Main Page ကို Login ဝင်ထားမှ ပေးကြည့်မယ်
+// သင့် folder အမည်က 'Public' (P အကြီး) ဖြစ်နေလို့ path.join မှာ အကြီးပြောင်းပေးရပါမယ်
 app.get('/', checkAuth, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'Public', 'index.html'));
 });
 
-app.use(express.static('public'));
+// Static files တွေအတွက်လည်း 'Public' (P အကြီး) သုံးပေးပါ
+app.use(express.static(path.join(__dirname, 'Public')));
 app.use('/uploads', checkAuth, express.static('uploads'));
 
-// Logout လုပ်ရန် လမ်းကြောင်း
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
-        if (err) {
-            return console.log(err);
-        }
-        // Session ဖျက်ပြီးရင် Login Page ကို ပြန်ပို့မယ်
+        if (err) return console.log(err);
         res.redirect('/login.html');
     });
 });
 
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
