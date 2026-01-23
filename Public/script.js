@@ -4,19 +4,18 @@ const courses = [
     { id: "bgp", name: "CCIE BGP", fileName: "CCIE_BGP.pdf" },
     { id: "mpls", name: "MPLS Concepts", fileName: "mpls_v1.pdf" },
     { id: "sdwan", name: "SD-WAN Architecture", fileName: "SDWAN_Architectire.pdf" },
-    { id: "ccnp Switch", name: "CCNP Switching", fileName: "ccnp_switch.pdf" },
-    { id: "ccna datacenter", name: "CCNA Datacenter", fileName: "ccna_datacenter.pdf" },
-    { id: "cisco aci", name: "Cisco ACI", fileName: "cisco_aci.pdf" },
-    { id: "Python Networking", name: "Python Networking", fileName: "Python_network_programming.pdf" },
-    { id: "CCIE R&S Third Edition", name: "CCIE R&S Third Edition", fileName: "CCIE_R&S.pdf" },
-    { id: "CCIE Multicast", name: "CCIE Multicast", fileName: "CCIE_Multicast.pdf" },
-    { id: "CCIE Ipsec", name: "CCIE Ipsec", fileName: "CCIE_Ipsec.pdf" },
-    { id: "CCNA", name: "CCNA”, fileName: “CCNA.pdf },
-    { id: "CCNP Route", name: "CCNP Route”, fileName: “CCNP_Route”.pdf },
-    { id: "CCNP Enterprise", name: "CCNP Enterprise", fileName: "CCNP_Enterprise.pdf" },
-    { id: "Network Automation", name: "Network Automation”, fileName: “Network_Automation.pdf" },
-    { id: "SDWAN Learning", name: "SDWAN Learning”, fileName: “SDWAN_Learning.pdf" },
-
+    { id: "ccnp-switch", name: "CCNP Switching", fileName: "ccnp_switch.pdf" },
+    { id: "ccna-dc", name: "CCNA Datacenter", fileName: "ccna_datacenter.pdf" },
+    { id: "cisco-aci", name: "Cisco ACI", fileName: "cisco_aci.pdf" },
+    { id: "python", name: "Python Networking", fileName: "Python_network_programming.pdf" },
+    { id: "ccie-rs", name: "CCIE R&S Third Edition", fileName: "CCIE_R&S.pdf" },
+    { id: "ccie-multi", name: "CCIE Multicast", fileName: "CCIE_Multicast.pdf" },
+    { id: "ccie-ipsec", name: "CCIE Ipsec", fileName: "CCIE_Ipsec.pdf" },
+    { id: "ccna", name: "CCNA", fileName: "CCNA.pdf" },
+    { id: "ccnp-route", name: "CCNP Route", fileName: "CCNP_Route.pdf" },
+    { id: "ccnp-ent", name: "CCNP Enterprise", fileName: "CCNP_Enterprise.pdf" },
+    { id: "net-auto", name: "Network Automation", fileName: "Network_Automation.pdf" },
+    { id: "sdwan-learn", name: "SDWAN Learning", fileName: "SDWAN_Learning.pdf" }
 ];
 
 const tabList = document.getElementById('tab-list');
