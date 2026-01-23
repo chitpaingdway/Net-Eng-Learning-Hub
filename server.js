@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Temporary Storage (Server restart ဖြစ်ရင် ပျက်ပါမည်)
 const users = [];
 
 app.use(bodyParser.json());
@@ -18,25 +17,20 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// Authentication Middleware
 function checkAuth(req, res, next) {
     if (req.session.user) next();
     else res.redirect('/login.html');
 }
 
-// --- ROUTES ---
+// PDF ဖိုင်များရှိသော uploads folder ကို လမ်းကြောင်းဖွင့်ပေးခြင်း (ဒီအပိုင်းက အရေးကြီးပါသည်)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.post('/signup', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        users.push({ 
-            username: req.body.username, 
-            password: hashedPassword 
-        });
+        users.push({ username: req.body.username, password: hashedPassword });
         res.send('Account created! <a href="/login.html">Login here</a>');
-    } catch {
-        res.status(500).send("Error creating account");
-    }
+    } catch { res.status(500).send("Error"); }
 });
 
 app.post('/login', async (req, res) => {
@@ -44,9 +38,7 @@ app.post('/login', async (req, res) => {
     if (user && await bcrypt.compare(req.body.password, user.password)) {
         req.session.user = user;
         res.redirect('/');
-    } else {
-        res.send('Invalid Login! <a href="/login.html">Try again</a>');
-    }
+    } else { res.send('Invalid Login! <a href="/login.html">Try again</a>'); }
 });
 
 app.get('/login.html', (req, res) => {
@@ -55,8 +47,6 @@ app.get('/login.html', (req, res) => {
     });
 });
 
-// PDF ဖိုင်များရှိသော uploads folder ကို လူတိုင်းကြည့်ရှုနိုင်အောင် လမ်းကြောင်းဖွင့်ပေးခြင်း
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.get('/', checkAuth, (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'index.html'), err => {
         if (err) res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -66,8 +56,4 @@ app.get('/', checkAuth, (req, res) => {
 app.use(express.static(path.join(__dirname, 'Public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/logout', (req, res) => {
-    req.session.destroy(() => res.redirect('/login.html'));
-});
-
-app.listen(PORT, () => console.log(`🚀 Back to basics running on ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Running on ${PORT}`));
