@@ -46,7 +46,14 @@ app.get('/login.html', (req, res) => {
         if (err) res.sendFile(path.join(__dirname, 'public', 'login.html'));
     });
 });
-
+// အရင်က အလွတ်ဖြစ်ခဲ့တဲ့ users array နေရာမှာ Admin ကို တစ်ခါတည်း ထည့်ထားပါမယ်
+const users = [
+    { 
+        username: "admin", 
+        // password က 'letmein' ကို bcrypt နဲ့ hash လုပ်ထားတာပါ
+        password: "$2a$10$7R6W.M9M4BvD6U6pX8kIu.eG0H/q8Kz1X8P7N/L.X1Y2Z3A4B5C6D" 
+    }
+];
 app.get('/', checkAuth, (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'index.html'), err => {
         if (err) res.sendFile(path.join(__dirname, 'public', 'index.html'));
