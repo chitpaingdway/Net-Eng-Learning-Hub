@@ -3,6 +3,7 @@
     --accent: #049fd9;
     --glass: rgba(255, 255, 255, 0.1);
     --border: rgba(255, 255, 255, 0.2);
+    --burnsys-orange: #f2994a; /* CCIE Highlight အတွက် အရောင်အသစ် */
 }
 
 body {
@@ -33,7 +34,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px; /* Instructor section နဲ့ ခြားဖို့ margin လျှော့လိုက်တယ် */
 }
 
 .brand { display: flex; align-items: center; gap: 15px; }
@@ -48,10 +49,52 @@ header {
 }
 .exit-btn:hover { background: rgba(255, 0, 0, 0.3); border-color: #ff4d4d; }
 
+/* --- [အသစ်ထည့်ထားသော Instructor Section Styling] --- */
+.instructor-header {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px 30px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    transition: 0.3s;
+}
+
+.instructor-header:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent);
+}
+
+.profile-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid var(--burnsys-orange);
+    margin-right: 25px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.instructor-meta h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+}
+
+.instructor-meta span {
+    color: var(--burnsys-orange);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+/* -------------------------------------------------- */
+
 /* Grid System */
 .course-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns for laptop */
+    grid-template-columns: repeat(4, 1fr);
     gap: 25px;
 }
 
@@ -99,15 +142,12 @@ header {
 
 #pdf-frame { width: 100%; height: calc(100% - 65px); border: none; }
 
-
-
-/* --- Mobile Responsive Additional Styles --- */
-
+/* Mobile Responsive Additional Styles */
 @media (max-width: 768px) {
     body {
         padding: 10px; 
         align-items: flex-start; 
-        overflow-y: auto; /* ဖုန်းမှာ အပေါ်အောက် scroll ဆွဲလို့ရအောင် */
+        overflow-y: auto;
     }
 
     .glass-container {
@@ -124,6 +164,20 @@ header {
         text-align: center;
     }
 
+    /* ဖုန်းမှာ Instructor Profile ကို အလယ်ပို့မယ် */
+    .instructor-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .profile-img {
+        margin-right: 0;
+        margin-bottom: 15px;
+        width: 80px;
+        height: 80px;
+    }
+
     .brand {
         flex-direction: column;
         gap: 10px;
@@ -134,7 +188,7 @@ header {
     }
 
     .course-grid {
-        grid-template-columns: 1fr; /* Card တွေကို တစ်ခုချင်းစီ အပေါ်အောက် စီမယ် */
+        grid-template-columns: 1fr;
         gap: 20px;
     }
 
@@ -146,7 +200,6 @@ header {
         font-size: 45px;
     }
 
-    /* PDF Viewer Modal ကို ဖုန်း screen အပြည့်ပြမယ် */
     .modal-content {
         width: 100%;
         height: 100%;
