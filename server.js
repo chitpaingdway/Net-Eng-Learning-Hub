@@ -29,7 +29,9 @@ const User = mongoose.model('User', new mongoose.Schema({
 
 // Email Transport Setup
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // SSL သုံးရန်
     auth: {
         user: 'chit.paingdway@gmail.com',
         pass: 'pbqxxqbjizrztkzs' 
