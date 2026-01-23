@@ -20,6 +20,13 @@
             </div>
             <a href="/logout" class="exit-btn">Exit Academy</a>
         </header>
+            <div class="instructor-header">
+                <img src="{{ url_for('static', filename='instructor.jpg') }}" class="profile-img" alt="CCIE Instructor">
+                <div class="instructor-meta">
+                <h2>Our Lead Instructor</h2>
+                <span>CCIE #68826 (Enterprise Infrastructure)</span>
+            </div>
+        </div>
 
         <div class="course-grid">
             <div class="card" onclick="openPDF('/uploads/ospf_course.pdf', 'OSPF Basics to Advanced')">
