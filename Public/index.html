@@ -21,7 +21,7 @@
             <a href="/logout" class="exit-btn">Exit Academy</a>
         </header>
 
-       <div class="course-grid">
+        <div class="course-grid">
             <div class="card" onclick="openPDF('/uploads/ospf_course.pdf', 'OSPF Basics to Advanced')">
                 <div class="icon">📘</div>
                 <h3>OSPF Basics</h3>
@@ -96,13 +96,21 @@
 
         function goFull() {
             const frame = document.getElementById("pdf-frame");
-            if (frame.requestFullscreen) frame.requestFullscreen();
-            else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
+            if (frame.requestFullscreen) {
+                frame.requestFullscreen();
+            } else if (frame.webkitRequestFullscreen) { /* Safari */
+                frame.webkitRequestFullscreen();
+            } else if (frame.msRequestFullscreen) { /* IE11 */
+                frame.msRequestFullscreen();
+            }
         }
 
+        // Close modal if user clicks outside of the content
         window.onclick = function(event) {
             const modal = document.getElementById('pdfModal');
-            if (event.target == modal) closePDF();
+            if (event.target == modal) {
+                closePDF();
+            }
         }
     </script>
 </body>
