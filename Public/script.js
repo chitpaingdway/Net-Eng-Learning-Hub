@@ -56,3 +56,21 @@ function selectCourse(index) {
 
 // စတင်ပွင့်ချိန်မှာ tab တွေကို ဖော်ပြပေးမယ်
 renderTabs();
+
+function showTab(tabId) {
+    // Content အားလုံးကို ဖျောက်ပါ
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+
+    // ခလုတ်အားလုံးက Active အရောင်ကို ဖြုတ်ပါ
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // နှိပ်လိုက်တဲ့ Tab ကို ပြပါ
+    document.getElementById(tabId).classList.add('active');
+    
+    // နှိပ်လိုက်တဲ့ ခလုတ်ကို အရောင်တင်ပါ
+    event.currentTarget.classList.add('active');
+}
