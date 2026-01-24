@@ -28,7 +28,22 @@
                 <span class="ccie-text">CCIE #68826 (Enterprise Infrastructure)</span>
             </div>
         </div>
+        <div class="tabs-container">
+            <button class="tab-btn active" onclick="showTab('ebooks')">📚 Learning E-Books</button>
+            <button class="tab-btn" onclick="showTab('videos')">🎥 Learning Video Courses</button>
+        </div>
 
+        <div id="ebooks" class="course-grid tab-content active">
+        </div>
+
+        <div id="videos" class="course-grid tab-content">
+            <div class="card">
+                <div class="icon">🚧</div>
+                <h3>Coming Soon</h3>
+                <p>Video courses are being uploaded to YouTube...</p>
+            </div>
+            </div>
+        
         <div class="course-grid">
             <div class="card" onclick="openPDF('/uploads/ospf_course.pdf', 'OSPF Basics to Advanced')">
                 <div class="icon">📘</div>
