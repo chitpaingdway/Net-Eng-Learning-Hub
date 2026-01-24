@@ -28,111 +28,139 @@
                 <span class="ccie-text">CCIE #68826 (Enterprise Infrastructure)</span>
             </div>
         </div>
+
         <div class="tabs-container">
             <button class="tab-btn active" onclick="showTab('ebooks')">📚 Learning E-Books</button>
             <button class="tab-btn" onclick="showTab('videos')">🎥 Learning Video Courses</button>
         </div>
 
         <div id="ebooks" class="course-grid tab-content active">
-        </div>
-
-        <div id="videos" class="course-grid tab-content">
-            <div class="card">
-                <div class="icon">🚧</div>
-                <h3>Coming Soon</h3>
-                <p>Video courses are being uploaded to YouTube...</p>
-            </div>
-            </div>
-        
-        <div class="course-grid">
             <div class="card" onclick="openPDF('/uploads/ospf_course.pdf', 'OSPF Basics to Advanced')">
                 <div class="icon">📘</div>
                 <h3>OSPF Basics</h3>
                 <p>Standard Module</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/CCIE_BGP.pdf', 'CCIE BGP')">
                 <div class="icon">🌐</div>
                 <h3>CCIE BGP</h3>
                 <p>Advanced Routing</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/mpls_v1.pdf', 'MPLS Concepts')">
                 <div class="icon">🔗</div>
                 <h3>MPLS Concepts</h3>
                 <p>Service Provider</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/SDWAN_Architectire.pdf', 'SD-WAN Architecture')">
                 <div class="icon">☁️</div>
                 <h3>SD-WAN</h3>
                 <p>Architecture</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/SDWAN_Learning.pdf', 'SD-WAN Learning')">
                 <div class="icon">☁️</div>
                 <h3>SD-WAN</h3>
                 <p>Learning SDWAN</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/CCIE_R&S.pdf', 'CCIE R&S Third Edition')">
                 <div class="icon">📚</div>
                 <h3>CCIE R&S Third Edition</h3>
                 <p>Cisco CCIE R&S</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/CCIE_Multicast.pdf', 'CCIE Multicast')">
                 <div class="icon">🏷️</div>
                 <h3>CCIE Multicast</h3>
                 <p>Cisco Multicast</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/CCIE_Ipsec.pdf', 'CCIE Ipsec')">
                 <div class="icon">🔐</div>
                 <h3>CCIE Ipsec</h3>
                 <p>Cisco IPSEC</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/ccnp_switch.pdf', 'CCNP Switching')">
                 <div class="icon">📗</div>
                 <h3>CCNP Switch</h3>
                 <p>L2 Enterprise</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/CCNP_Route.pdf', 'CCNP Route')">
                 <div class="icon">📕</div>
                 <h3>CCNP Route</h3>
                 <p>L3 Routing</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/ccna_datacenter.pdf', 'CCNA Datacenter')">
                 <div class="icon">🏢</div>
                 <h3>CCNA DC</h3>
                 <p>Cloud & Data Center</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/CCNA.pdf', 'CCNA Routing & Switching')">
                 <div class="icon">📔</div>
                 <h3>CCNA</h3>
                 <p>Routing & Switching</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/cisco_aci.pdf', 'Cisco ACI')">
                 <div class="icon">💡</div>
                 <h3>Cisco ACI</h3>
                 <p>SDN Fabric</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/Network_Automation.pdf', 'Network Automation')">
                 <div class="icon">🪄</div>
                 <h3>Network Automation</h3>
                 <p>Automation Cookbook</p>
             </div>
-
             <div class="card" onclick="openPDF('/uploads/Python_network_programming.pdf', 'Python Networking')">
                 <div class="icon">🐍</div>
                 <h3>Automation</h3>
                 <p>Python Net-Dev</p>
+            </div>
+        </div>
+
+        <div id="videos" class="course-grid tab-content">
+            <div class="card category-card" onclick="toggleCategory('ai-learning')">
+                <div class="icon">🤖</div>
+                <h3>AI Learning</h3>
+                <p>Gemini & Prompting</p>
+            </div>
+            <div class="card category-card" onclick="toggleSubCategoryMenu('igp-titles')">
+                <div class="icon">🚦</div>
+                <h3>Cisco Routing IGP</h3>
+                <p>OSPF, EIGRP, RIP, VRF</p>
+            </div>
+            <div class="card category-card" onclick="toggleCategory('routing-bgp')">
+                <div class="icon">🌐</div>
+                <h3>Cisco BGP</h3>
+                <p>Concept, Advanced & Labs</p>
+            </div>
+            <div class="card category-card" onclick="toggleCategory('mpls-section')">
+                <div class="icon">🔗</div>
+                <h3>Cisco MPLS</h3>
+                <p>Basic to Labs</p>
+            </div>
+
+            <div id="video-lists-container" style="grid-column: 1 / -1; display: none;">
+                <button class="exit-btn" onclick="backToCategories()" style="margin-bottom: 25px;">⬅ Back to Main Titles</button>
+
+                <div id="igp-titles" class="video-sub-grid" style="display: none;">
+                    <div class="card sub-category-card" onclick="toggleIGPVideos('ospf-videos')"><h3>OSPF</h3></div>
+                    <div class="card sub-category-card" onclick="toggleIGPVideos('eigrp-videos')"><h3>EIGRP</h3></div>
+                    <div class="card sub-category-card" onclick="toggleIGPVideos('rip-videos')"><h3>RIP</h3></div>
+                    <div class="card sub-category-card" onclick="toggleIGPVideos('vrf-videos')"><h3>VRF</h3></div>
+                </div>
+
+                <div id="ospf-videos" class="video-sub-grid final-videos" style="display: none;">
+                    <div class="card" onclick="openVideo('ID', 'OSPF Basic')"><h4>OSPF Basic</h4></div>
+                    <div class="card" onclick="openVideo('ID', 'OSPF Advanced')"><h4>OSPF Advanced</h4></div>
+                    <div class="card" onclick="openVideo('ID', 'OSPF Lab 1')"><h4>OSPF Lab 1</h4></div>
+                </div>
+                <div id="eigrp-videos" class="video-sub-grid final-videos" style="display: none;">
+                    <div class="card" onclick="openVideo('ID', 'EIGRP Lab')"><h4>EIGRP Lab</h4></div>
+                </div>
+                <div id="ai-learning" class="video-sub-grid final-videos" style="display: none;">
+                    <div class="card" onclick="openVideo('ID', 'AI Gemini')"><h4>AI Gemini</h4></div>
+                </div>
+                <div id="routing-bgp" class="video-sub-grid final-videos" style="display: none;">
+                    <div class="card" onclick="openVideo('ID', 'BGP Intro')"><h4>BGP Intro</h4></div>
+                </div>
+                <div id="mpls-section" class="video-sub-grid final-videos" style="display: none;">
+                    <div class="card" onclick="openVideo('ID', 'MPLS Basic')"><h4>MPLS Basic</h4></div>
+                </div>
             </div>
         </div>
     </div>
@@ -151,38 +179,18 @@
         </div>
     </div>
 
-    <script>
-        function openPDF(path, title) {
-            const modal = document.getElementById('pdfModal');
-            const frame = document.getElementById('pdf-frame');
-            document.getElementById('pdf-title').innerText = title;
-            document.getElementById('dl-link').href = path;
-            frame.src = path;
-            modal.style.display = "block";
-        }
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="video-title">Video Player</span>
+                <span class="close" onclick="closeVideo()">&times;</span>
+            </div>
+            <div class="video-wrapper">
+                <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
-        function closePDF() {
-            document.getElementById('pdfModal').style.display = "none";
-            document.getElementById('pdf-frame').src = "";
-        }
-
-        function goFull() {
-            const frame = document.getElementById("pdf-frame");
-            if (frame.requestFullscreen) {
-                frame.requestFullscreen();
-            } else if (frame.webkitRequestFullscreen) {
-                frame.webkitRequestFullscreen();
-            } else if (frame.msRequestFullscreen) {
-                frame.msRequestFullscreen();
-            }
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('pdfModal');
-            if (event.target == modal) {
-                closePDF();
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
