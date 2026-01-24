@@ -75,10 +75,12 @@ function openVideo(id, title) {
     const modal = document.getElementById('videoModal');
     const frame = document.getElementById('video-frame');
     document.getElementById('video-title').innerText = title;
-    frame.src = "https://www.youtube.com/embed/" + id;
+    
+    // ?modestbranding=1&rel=0&showinfo=0 ဆိုတာတွေက YouTube logo နဲ့ တခြား ဗီဒီယိုတွေကို ဖျောက်ပေးတာပါ
+    frame.src = `https://www.youtube.com/embed/${id}?modestbranding=1&rel=0&iv_load_policy=3&controls=1`;
+    
     modal.style.display = "block";
 }
-
 function closeVideo() {
     document.getElementById('videoModal').style.display = "none";
     document.getElementById('video-frame').src = "";
