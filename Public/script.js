@@ -1,4 +1,4 @@
-// သင်ခန်းစာ အချက်အလက်များ
+// သင်ခန်းစာ အချက်အလက်များ (E-books အတွက်)
 const courses = [
     { id: "ospf", name: "OSPF Basics to Advanced", fileName: "ospf_course.pdf" },
     { id: "bgp", name: "CCIE BGP", fileName: "CCIE_BGP.pdf" },
@@ -18,59 +18,80 @@ const courses = [
     { id: "sdwan-learn", name: "SDWAN Learning", fileName: "SDWAN_Learning.pdf" }
 ];
 
-const tabList = document.getElementById('tab-list');
-const viewer = document.getElementById('pdf-viewer');
-const title = document.getElementById('current-title');
-const downloadBtn = document.getElementById('download-link');
-const fileNameLabel = document.getElementById('file-name');
-
-// Tab များ ထုတ်ပေးခြင်း
-function renderTabs() {
-    tabList.innerHTML = courses.map((course, index) => `
-        <li class="nav-item" id="tab-${index}" onclick="selectCourse(${index})">
-            ${course.name}
-        </li>
-    `).join('');
-    
-    // ပထမဆုံး သင်ခန်းစာကို auto ဖွင့်ထားပေးမယ်
-    if(courses.length > 0) selectCourse(0);
-}
-
-// Course ရွေးချယ်ခြင်း
-function selectCourse(index) {
-    const selected = courses[index];
-    
-    // UI Update
-    title.innerText = selected.name;
-    fileNameLabel.innerText = "Viewing: " + selected.fileName;
-    
-    // PDF ပွင့်စေရန် (uploads folder ထဲက file ကို ခေါ်တာပါ)
-    viewer.src = `/uploads/${selected.fileName}`;
-    downloadBtn.href = `/uploads/${selected.fileName}`;
-
-    // Active Tab အရောင်ပြောင်းရန်
-    document.querySelectorAll('.nav-item').forEach((tab, i) => {
-        tab.classList.toggle('active', i === index);
-    });
-}
-
-// စတင်ပွင့်ချိန်မှာ tab တွေကို ဖော်ပြပေးမယ်
-renderTabs();
-
+// --- Tab Switching Logic ---
 function showTab(tabId) {
-    // Content အားလုံးကို ဖျောက်ပါ
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-
-    // ခလုတ်အားလုံးက Active အရောင်ကို ဖြုတ်ပါ
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-
-    // နှိပ်လိုက်တဲ့ Tab ကို ပြပါ
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.getElementById(tabId).classList.add('active');
-    
-    // နှိပ်လိုက်တဲ့ ခလုတ်ကို အရောင်တင်ပါ
     event.currentTarget.classList.add('active');
+    
+    // Video Tab ကိုနှိပ်ရင် Level 1 အတိုင်း Category တွေကို ပြန်ပြမယ်
+    if(tabId === 'videos') backToCategories();
+}
+
+// --- Video Navigation Logic ---
+function toggleCategory(categoryId) {
+    document.querySelectorAll('.category-card').forEach(card => card.style.display = 'none');
+    document.getElementById('video-lists-container').style.display = 'block';
+    document.querySelectorAll('.video-sub-grid').forEach(list => list.style.display = 'none');
+    document.getElementById(categoryId).style.display = 'grid';
+}
+
+function toggleSubCategoryMenu(menuId) {
+    document.querySelectorAll('.category-card').forEach(card => card.style.display = 'none');
+    document.getElementById('video-lists-container').style.display = 'block';
+    document.querySelectorAll('.video-sub-grid').forEach(list => list.style.display = 'none');
+    document.getElementById(menuId).style.display = 'grid';
+}
+
+function toggleIGPVideos(videoId) {
+    document.querySelectorAll('.video-sub-grid').forEach(list => list.style.display = 'none');
+    document.getElementById(videoId).style.display = 'grid';
+}
+
+function backToCategories() {
+    const container = document.getElementById('video-lists-container');
+    if(container) container.style.display = 'none';
+    document.querySelectorAll('.category-card').forEach(card => card.style.display = 'block');
+    document.querySelectorAll('.video-sub-grid').forEach(list => list.style.display = 'none');
+}
+
+// --- PDF & Video Modal Logic ---
+function openPDF(path, title) {
+    const modal = document.getElementById('pdfModal');
+    const frame = document.getElementById('pdf-frame');
+    document.getElementById('pdf-title').innerText = title;
+    document.getElementById('dl-link').href = path;
+    frame.src = path;
+    modal.style.display = "block";
+}
+
+function closePDF() {
+    document.getElementById('pdfModal').style.display = "none";
+    document.getElementById('pdf-frame').src = "";
+}
+
+function openVideo(id, title) {
+    const modal = document.getElementById('videoModal');
+    const frame = document.getElementById('video-frame');
+    document.getElementById('video-title').innerText = title;
+    frame.src = "https://www.youtube.com/embed/" + id;
+    modal.style.display = "block";
+}
+
+function closeVideo() {
+    document.getElementById('videoModal').style.display = "none";
+    document.getElementById('video-frame').src = "";
+}
+
+function goFull() {
+    const frame = document.getElementById("pdf-frame");
+    if (frame.requestFullscreen) frame.requestFullscreen();
+    else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
+}
+
+window.onclick = function(event) {
+    if (event.target.className === 'modal') {
+        closePDF(); closeVideo();
+    }
 }
